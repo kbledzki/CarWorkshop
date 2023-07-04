@@ -22,6 +22,13 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
+    @GetMapping("/vehicles/all")
+    public String getAllVehicles(Model model) {
+        model.addAttribute("vehiclesList", vehicleService.getAllVehicles());
+        return "vehicles";
+    }
+
+
     @GetMapping("/vehicles")
     public String getVehiclesToFix(Model model) {
         model.addAttribute("vehiclesList", vehicleService.findNotFixedVehicles());
