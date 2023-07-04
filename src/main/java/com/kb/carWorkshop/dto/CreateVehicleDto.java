@@ -1,5 +1,6 @@
 package com.kb.carWorkshop.dto;
 
+import com.kb.carWorkshop.enums.Color;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
