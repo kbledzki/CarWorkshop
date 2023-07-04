@@ -1,6 +1,6 @@
 package com.kb.carWorkshop.enums;
 
-public class Color {
+public enum Color {
     BLACK("Black"),
     WHITE("White"),
     SILVER("Silver"),
