@@ -16,7 +16,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
-
     public static final String TABLE_NAME = "vehicle";
     public static final String COLUMN_PREFIX = "v_";
 
