@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,14 +30,16 @@ public class VehicleService implements VehicleServiceInterface {
     @Transactional
     public CreateVehicleDto saveVehicle(CreateVehicleDto createVehicleDto) {
         Vehicle vehicle = modelMapper.map(createVehicleDto, Vehicle.class);
-        vehicle.setFixed(false);
+        vehicle.setFixed(true);
+        vehicle.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE));
         Vehicle persistedEntity = vehicleRepository.save(vehicle);
         return modelMapper.map(persistedEntity, CreateVehicleDto.class);
     }
 
     public VehicleDto fixVehicleById(UUID id) {
         Vehicle vehicleToUpdate = vehicleRepository.getById(id);
-        vehicleToUpdate.setFixed(true);
+        vehicleToUpdate.setFixed(false);
+        vehicleToUpdate.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE));
         vehicleRepository.save(vehicleToUpdate);
         return modelMapper.map(vehicleToUpdate, VehicleDto.class);
     }
@@ -75,7 +79,7 @@ public class VehicleService implements VehicleServiceInterface {
 
     @Override
     public List<VehicleDto> findFixedVehicles() {
-        return vehicleRepository.findByFixed(Sort.by(Sort.Direction.DESC, "updatedAt"))
+        return vehicleRepository.findByFixed(/*Sort.by(Sort.Direction.DESC, "updatedAt")*/)
                 .stream()
                 .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class))
                 .collect(Collectors.toList());
@@ -83,7 +87,7 @@ public class VehicleService implements VehicleServiceInterface {
 
     @Override
     public List<VehicleDto> findNotFixedVehicles() {
-        return vehicleRepository.findNotFixed(Sort.by(Sort.Direction.ASC, "createdAt"))
+        return vehicleRepository.findNotFixed(/*Sort.by(Sort.Direction.ASC, "createdAt")*/)
                 .stream()
                 .map(vehicle -> modelMapper.map(vehicle, VehicleDto.class))
                 .collect(Collectors.toList());

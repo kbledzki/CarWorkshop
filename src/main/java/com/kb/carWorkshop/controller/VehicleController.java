@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Controller
@@ -44,6 +46,7 @@ public class VehicleController {
     @GetMapping("vehicle/new")
     public String getNewVehicleForm(Model model) {
         model.addAttribute("vehicle", new CreateVehicleDto());
+        model.addAttribute("localDateTime", LocalDateTime.now());
         return "new-vehicle-form";
     }
 

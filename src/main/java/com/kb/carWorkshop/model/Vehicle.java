@@ -2,12 +2,11 @@ package com.kb.carWorkshop.model;
 
 import com.kb.carWorkshop.enums.Color;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
-
 import java.util.UUID;
 
 @Entity
@@ -22,8 +21,8 @@ public class Vehicle {
     public static final String COLUMN_PREFIX = "v_";
 
     @Id
-    @GeneratedValue
-    @Column(name = COLUMN_PREFIX + "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "BINARY(16)", name = COLUMN_PREFIX + "id")
     private UUID id;
 
     @Column(name = COLUMN_PREFIX + "name", nullable = false)
@@ -40,4 +39,10 @@ public class Vehicle {
 
     @Column(name = COLUMN_PREFIX + "productionDate")
     private int productionDate;
+
+    @Column(name = "created_at")
+    private String createdAt;
+
+    @Column(name = "updated_at")
+    private String updatedAt;
 }
