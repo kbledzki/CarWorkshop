@@ -1,0 +1,54 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<body>
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container" >
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}" th:text="#{navBar.appName}">
+                    <span th:text="#{navBar.appName}"></span>
+                </a>
+            </div>
+            <button type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    class="navbar-toggler"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item">
+                        <a th:href="@{/vehicles}" class="nav-link">
+                            <span th:text="#{navbar.carsToFix}"></span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/vehicle/new}" class="nav-link">
+                            <span th:text="#{navBar.addNewCar}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/vehicle/fix}" class="nav-link">
+                            <span th:text="#{navBar.fixCar}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/vehicles/fixed}" class="nav-link">
+                            <span th:text="#{navBar.fixedCar}"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+</body>
+</html>
