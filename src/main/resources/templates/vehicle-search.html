@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<div th:replace="fragments/navBar :: nav"></div>
+<section class="py-5 mt-0 align-items-start d-flex bg-light"
+         style="min-height: 50vh;">
+    <div class="container w-50">
+        <div class="row justify-content-center">
+            <div class="card shadow">
+                <h2 class="card-header my-3 text-center"
+                    th:text="#{fixVehicle.fix}"></h2>
+                <div class="card-body mx-auto">
+                    <p class="text-center"
+                       th:text="#{fixVehicle.desc}"></p>
+                    <form th:action="@{/vehicle/fix/search}"
+                          method="get">
+                        <div class="row justify-content-center mb-3">
+                            <div class="col">
+                                <div class="form-group input-group">
+                                    <input type="search" name="registration"
+                                           class="form-control"
+                                           th:placeholder="#{fixVehicle.input}" required/>
+                                    <input type="submit"
+                                           value="Search"
+                                           class="btn btn-outline-success"
+                                           th:value="#{fixVehicle.search}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
