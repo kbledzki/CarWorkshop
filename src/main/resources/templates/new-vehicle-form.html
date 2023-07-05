@@ -57,7 +57,7 @@
                                 <select class="form-select"
                                         id="color_input_id"
                                         th:field="*{color}">
-                                    <option th:each="colorOpt : ${T(com.infoShare.carService.enums.Color).values()}"
+                                    <option th:each="colorOpt : ${T(com.kb.carWorkshop.enums.Color).values()}"
                                             th:value="${colorOpt}">
                                         <span th:text="${colorOpt.value}"></span>
                                     </option>

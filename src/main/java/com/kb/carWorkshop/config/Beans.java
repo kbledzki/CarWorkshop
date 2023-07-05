@@ -12,4 +12,4 @@ public class Beans {
         return new ModelMapper();
     }
 }
-}
+

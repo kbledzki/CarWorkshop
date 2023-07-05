@@ -40,5 +40,4 @@ public class Vehicle {
 
     @Column(name = COLUMN_PREFIX + "productionDate")
     private int productionDate;
-
 }
