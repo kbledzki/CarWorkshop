@@ -37,7 +37,7 @@ public class VehicleService implements VehicleServiceInterface {
     }
 
     public VehicleDto fixVehicleById(Long id) {
-        Vehicle vehicleToUpdate = vehicleRepository.getById(id);
+        Vehicle vehicleToUpdate = vehicleRepository.findById(id).orElseThrow(()->new RuntimeException());
         vehicleToUpdate.setFixed(true);
         vehicleToUpdate.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss")));
         vehicleRepository.save(vehicleToUpdate);
@@ -57,16 +57,7 @@ public class VehicleService implements VehicleServiceInterface {
     @Transactional
     public VehicleDto getVehicleById(Long id) {
         Optional<Vehicle> vehicleById = vehicleRepository.findById(id);
-        return modelMapper.map(vehicleById, VehicleDto.class);
-    }
-
-    @Override
-    @Transactional
-    public List<VehicleDto> findVehicleByName(String name) {
-        return vehicleRepository.findByName(name)
-                .stream()
-                .map(vehicle -> modelMapper.map(vehicle,VehicleDto.class))
-                .collect(Collectors.toList());
+        return modelMapper.map(vehicleById.orElseThrow(()->new RuntimeException()), VehicleDto.class);
     }
 
     @Transactional
