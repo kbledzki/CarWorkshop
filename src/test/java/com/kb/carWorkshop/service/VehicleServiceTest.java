@@ -40,17 +40,6 @@ class VehicleServiceTest {
     }
 
     @Test
-    void shouldSaveVehicle() {
-        //given
-        Vehicle vehicle = new Vehicle();
-        when(vehicleRepositoryMock.save(vehicle)).thenReturn(vehicle);
-        //when
-        CreateVehicleDto savedVehicle = vehicleService.saveVehicle(new CreateVehicleDto());
-        //then
-        verify(vehicleRepositoryMock, times(1)).save(vehicle);
-    }
-
-    @Test
     void shouldFindVehicleById() {
         //given
         List<Vehicle> vehicleToTest = InitData.vehicleList();
@@ -61,6 +50,17 @@ class VehicleServiceTest {
         verify(vehicleRepositoryMock, times(1)).findById(2L);
         assertEquals("ford", vehicleById.getName());
 
+    }
+    @Test
+    void shouldFixVehicleById(){
+        //given
+        List<Vehicle> vehicleToTest = InitData.vehicleList();
+        when(vehicleRepositoryMock.findById(anyLong())).thenReturn(Optional.of(vehicleToTest.get(1)));
+        //when
+        VehicleDto vehicleById = vehicleService.fixVehicleById(2L);
+        //then
+        verify(vehicleRepositoryMock, times(1)).findById(2L);
+        assertEquals(true, vehicleById.isFixed());
     }
 
     @Test
@@ -75,8 +75,13 @@ class VehicleServiceTest {
     }
     @Test
     void findByRegistrationNumber() {
+        List<Vehicle> vehicleToTest = InitData.vehicleList();
+        when(vehicleRepositoryMock.findAll()).thenReturn(vehicleToTest);
+        //when
+        List<VehicleDto> allVehicle = vehicleService.getAllVehicles().stream().filter(v ->v.getRegistrationNumber().equals("GD22290")).collect(Collectors.toList());
+        //then
+        assertThat(allVehicle).hasSize(1);
     }
-
     @Test
     void shouldFindFixedVehicles() {
         //given
@@ -97,5 +102,15 @@ class VehicleServiceTest {
         List<VehicleDto> resultListOfVehicle = vehicleService.findNotFixedVehicles();
         //then
         assertThat(resultListOfVehicle).hasSize(3);
+    }
+    @Test
+    void shouldSaveVehicle() {
+        //given
+        Vehicle vehicle = new Vehicle();
+        when(vehicleRepositoryMock.save(vehicle)).thenReturn(vehicle);
+        //when
+        CreateVehicleDto savedVehicle = vehicleService.saveVehicle(new CreateVehicleDto());
+        //then
+        verify(vehicleRepositoryMock, times(1)).save(vehicle);
     }
 }
