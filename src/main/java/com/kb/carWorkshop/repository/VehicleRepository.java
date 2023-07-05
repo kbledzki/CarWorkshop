@@ -23,10 +23,10 @@ public interface VehicleRepository extends JpaRepository<Vehicle, UUID> {
     List<Vehicle> findByRegistrationNumberAndFixed(String registrationNumber);
 
     @Query("select v from Vehicle v where v.isFixed = true")
-    List<Vehicle> findByFixed(/*Sort sort*/);
+    List<Vehicle> findByFixed(Sort sort);
 
     @Query("select v from Vehicle v where v.isFixed = false")
-    List<Vehicle> findNotFixed(/*Sort sort*/);
+    List<Vehicle> findNotFixed(Sort sort);
 
     @Transactional
     @Modifying
