@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class VehicleDto {
 
-    private UUID id;
+    private Long id;
     private String name;
     private String registrationNumber;
     private boolean isFixed;

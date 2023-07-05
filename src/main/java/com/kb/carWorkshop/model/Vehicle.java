@@ -20,9 +20,9 @@ public class Vehicle {
     public static final String COLUMN_PREFIX = "v_";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "BINARY(16)", name = COLUMN_PREFIX + "id")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = COLUMN_PREFIX + "name", nullable = false)
     private String name;

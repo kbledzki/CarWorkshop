@@ -36,7 +36,7 @@ public class VehicleService implements VehicleServiceInterface {
         return modelMapper.map(persistedEntity, CreateVehicleDto.class);
     }
 
-    public VehicleDto fixVehicleById(UUID id) {
+    public VehicleDto fixVehicleById(Long id) {
         Vehicle vehicleToUpdate = vehicleRepository.getById(id);
         vehicleToUpdate.setFixed(true);
         vehicleToUpdate.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss")));
@@ -55,7 +55,7 @@ public class VehicleService implements VehicleServiceInterface {
 
     @Override
     @Transactional
-    public VehicleDto getVehicleById(UUID id) {
+    public VehicleDto getVehicleById(Long id) {
         Optional<Vehicle> vehicleById = vehicleRepository.findById(id);
         return modelMapper.map(vehicleById, VehicleDto.class);
     }

@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface VehicleServiceInterface {
     CreateVehicleDto saveVehicle(CreateVehicleDto createVehicleDto);
     List<VehicleDto> getAllVehicles();
-    VehicleDto getVehicleById(UUID id);
+    VehicleDto getVehicleById(Long id);
     List<VehicleDto> findVehicleByName(String name);
     List<VehicleDto> findFixedVehicles();
     List<VehicleDto> findNotFixedVehicles();

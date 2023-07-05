@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, UUID> {
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query("select v from Vehicle v where v.name = ?1")
     List<Vehicle> findByName(String name);
 
@@ -30,5 +30,5 @@ public interface VehicleRepository extends JpaRepository<Vehicle, UUID> {
     @Transactional
     @Modifying
     @Query("update Vehicle v set v.isFixed = ?1 where v.id = ?2")
-    void updateVehicle(boolean fixed, UUID id);
+    void updateVehicle(boolean fixed, Long id);
 }

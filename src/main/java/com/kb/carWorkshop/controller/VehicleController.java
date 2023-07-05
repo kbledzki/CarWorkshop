@@ -66,7 +66,7 @@ public class VehicleController {
     }
 
     @GetMapping("vehicle/fix/{id}")
-    public String fixVehicleView(@PathVariable(value = "id") UUID id, Model model) {
+    public String fixVehicleView(@PathVariable(value = "id") Long id, Model model) {
         VehicleDto vehicleDto = vehicleService.fixVehicleById(id);
         if (vehicleDto == null) {
             return "not-found";
